@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>StudyWriteMd</title>
+    <link href="/2020/04/15/StudyWriteMd/"/>
+    <url>/2020/04/15/StudyWriteMd/</url>
+    
+    <content type="html"><![CDATA[<h3 id="标签插件"><a href="#标签插件" class="headerlink" title="标签插件"></a>标签插件</h3><h4 id="引用块：在文章中插入引言，可包含作者、来源和标题。"><a href="#引用块：在文章中插入引言，可包含作者、来源和标题。" class="headerlink" title="引用块：在文章中插入引言，可包含作者、来源和标题。"></a>引用块：在文章中插入引言，可包含作者、来源和标题。</h4><ul><li><strong>没有提供参数，则只输出普通的 blockquote</strong></li></ul><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit lacus ut purus iaculis feugiat. Sed nec tempor elit, quis aliquam neque. Curabitur sed diam eget dolor fermentum semper at eu lorem.</p></blockquote><ul><li><strong>引用书上的句子</strong></li></ul><blockquote><p>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.</p><footer><strong>David Levithan</strong><cite>Wide Awake</cite></footer></blockquote><ul><li><strong>引用 Twitter</strong></li></ul><blockquote><p>NEW: DevDocs now comes with syntax highlighting. <a href="http://devdocs.io" target="_blank" rel="noopener">http://devdocs.io</a></p><footer><strong>@DevDocs</strong><cite><a href="https://twitter.com/devdocs/status/356095192085962752" target="_blank" rel="noopener">twitter.com/devdocs/status/356095192085962752</a></cite></footer></blockquote><ul><li><strong>引用网络上的文章</strong></li></ul><blockquote><p>Every interaction is both precious and an opportunity to delight.</p><footer><strong>Seth Godin</strong><cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html" target="_blank" rel="noopener">Welcome to Island Marketing</a></cite></footer></blockquote><h4 id="代码块：在文章中插入代码。"><a href="#代码块：在文章中插入代码。" class="headerlink" title="代码块：在文章中插入代码。"></a>代码块：在文章中插入代码。</h4><ul><li><strong>普通的代码块</strong></li></ul><pre><code>alert(&#39;Hello World!&#39;);</code></pre><ul><li><strong>指定语言</strong></li></ul><pre><code>[rectangle setX: 10 y: 10 width: 20 height: 20];</code></pre><ul><li>附加说明</li></ul><pre><code>array.map(callback[, thisArg])</code></pre><ul><li>附加说明和网址</li></ul><pre><code>_.compact([0, 1, false, 2, &#39;&#39;, 3]);&#x3D;&gt; [1, 2, 3]</code></pre><h4 id="反引号代码块"><a href="#反引号代码块" class="headerlink" title="反引号代码块"></a>反引号代码块</h4><pre><code class="java">public void codeBlock() {  System.out.println(&quot;Sunshine&quot;);}</code></pre><h4 id="Image：在文章中插入指定大小的图片。"><a href="#Image：在文章中插入指定大小的图片。" class="headerlink" title="Image：在文章中插入指定大小的图片。"></a>Image：在文章中插入指定大小的图片。</h4><img src="/img/%C2%B7" srcset="/img/loading.gif" class="" title="&#x2F;4UexhWLVcnY.jpg"><h4 id="Link：在文章中插入链接，并自动给外部链接添加-target-”-blank”-属性。"><a href="#Link：在文章中插入链接，并自动给外部链接添加-target-”-blank”-属性。" class="headerlink" title="Link：在文章中插入链接，并自动给外部链接添加 target=”_blank” 属性。"></a>Link：在文章中插入链接，并自动给外部链接添加 target=”_blank” 属性。</h4><a href="http://www.baidu.com/" title="" target="">百度</a><h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><div class="note note-success">            <p>这是个<code>success</code>标签</p>          </div><div class="note note-warning">            <p>这是个<code>warning</code>标签</p>          </div><h4 id="行内标签"><a href="#行内标签" class="headerlink" title="行内标签"></a>行内标签</h4><span class="label label-primary">primary</span><span class="label label-success">success</span>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>ThreadLocal简介</title>
+    <link href="/2020/04/14/ThreadLocal%E7%AE%80%E4%BB%8B/"/>
+    <url>/2020/04/14/ThreadLocal%E7%AE%80%E4%BB%8B/</url>
+    
+    <content type="html"><![CDATA[<ul><li><strong>ThreadLocal简介</strong> </li></ul><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzk0NDM2NS0xNDVjNmMzOTc3NDM0Yzk5LnBuZz9pbWFnZU1vZ3IyL2F1dG8tb3JpZW50L3N0cmlwJTdDaW1hZ2VWaWV3Mi8yL3cvMTI0MA" srcset="/img/loading.gif" alt=""></p><ul><li><p><strong>实现原理</strong></p><ul><li><p><code>ThreadLocalMap</code>的key = 当前ThreadLocal实例；value = 该线程设置的存储在ThreadLocal变量的值。</p></li><li><p>该key是 ThreadLocal对象的弱引用 <code>Entry extends WeakReference</code>；当要抛弃掉ThreadLocal对象时，垃圾收集器会忽略该 key的引用而清理掉ThreadLocal对象。</p><pre><code class="java">/** * 设置该线程在ThreadLocal中存储的变量，最终实际上存储到了ThreadLocalMap对象中 * ThreadLocalMap的key = 当前ThreadLocal实例 * ThreadLocalMap的value = 该线程设置的存储在ThreadLocal变量的值 */public void set(T value) {  Thread t = Thread.currentThread();  ThreadLocalMap map = getMap(t);  if (map != null)    // 若该线程的ThreadLocalMap对象已存在，则替换该Map里的值；否则创建1个ThreadLocalMap对象    map.set(this, value);  else    createMap(t, value);}ThreadLocalMap getMap(Thread t) {  return t.threadLocals;}void createMap(Thread t, T firstValue) {  // this为当前ThreadLocal实例  t.threadLocals = new ThreadLocalMap(this, firstValue);}// 获取该线程在ThreadLocal中存储的变量，实际上是从ThreadLocalMap对象中获取public T get() {  Thread t = Thread.currentThread();  ThreadLocalMap map = getMap(t);  // 若该线程的ThreadLocalMap对象已存在，则直接获取该Map里的值；否则则通过初始化函数创建1个ThreadLocalMap对象  if (map != null) {    ThreadLocalMap.Entry e = map.getEntry(this);    if (e != null) {      @SuppressWarnings(&quot;unchecked&quot;)      T result = (T)e.value;      return result;    }  }  return setInitialValue();}private T setInitialValue() {  T value = initialValue();  Thread t = Thread.currentThread();  ThreadLocalMap map = getMap(t);  if (map != null)    map.set(this, value);  else    createMap(t, value);  return value;}protected T initialValue() {  return null;}public class Thread implements Runnable {  // 线程类实例化后，每个线程对象拥有独立的threadLocals变量，threadLocals变量在ThreadLocal对象中通过set()或get()进行操作  ThreadLocal.ThreadLocalMap threadLocals = null;}</code></pre></li></ul></li></ul><ul><li><p><strong>ThreadLocal如何做到线程安全？</strong></p><ul><li><p><strong>每个线程拥有自己独立的ThreadLocal变量</strong>（无论是对ThreadLocal变量读还是写实际上最终操作的是本线程中的ThreadLocalMap对象[键 - 值] ）。</p><pre><code class="java">// 例如本例中stringThreadLocal，每个新建出来的MyRunnable线程都会有自己的一份stringThreadLocal ThreadLocal变量。public class MyRunnable implements Runnable {    // 创建ThreadLocal &amp; 初始化  private ThreadLocal&lt;String&gt; stringThreadLocal = ThreadLocal.withInitial(() -&gt; &quot;Init value&quot;);  @Override  public void run() {    // 运行线程时，分别设置 &amp; 获取 ThreadLocal的值    String name = Thread.currentThread().getName();    // 设置值ThreadLocal的value = 线程名    stringThreadLocal.set(name + &quot;的threadLocal&quot;);     try {      Thread.sleep(1000);    } catch (InterruptedException e) {      e.printStackTrace();    }    // 获取指定ThreadLocal的value    System.out.println(name + &quot;：&quot; + stringThreadLocal.get());  }}</code></pre></li></ul></li></ul><ul><li><p>ThreadLocalMap变量的键 key 是唯一的(当前ThreadLocal实例)</p></li><li><p><strong>ThreadLocal与同步机制的区别</strong><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzk0NDM2NS0yYTkwMWFhNjg4N2VlYWM4LnBuZz9pbWFnZU1vZ3IyL2F1dG8tb3JpZW50L3N0cmlwJTdDaW1hZ2VWaWV3Mi8yL3cvMTI0MA" srcset="/img/loading.gif" alt="ThreadLocal与同步机制的区别"></p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java</tag>
+      
+      <tag>ThreadLocal</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
